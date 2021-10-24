@@ -21,12 +21,12 @@ import frc.robot.subsystems.Elevator.commands.UpdateElevator;
  */
 public class RobotContainer {
   private Button a = new Button();
-  private boolean UpOrDown = true;
+  private boolean elevatorMode = true;
 
   // The robot's subsystems and commands are defined here...
 
-  public void setUpOrDown(boolean upOrDown){
-    this.UpOrDown = upOrDown;
+  public void setElevatorMode(boolean elevatorMode){
+    this.elevatorMode = elevatorMode;
   }
 
   /**
@@ -44,7 +44,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    a.whenPressed(new UpdateElevator(UpOrDown));
+    a.whenPressed(new UpdateElevator(elevatorMode));
   }
 
 

@@ -7,16 +7,15 @@ import static frc.robot.Constants.Elevator.*;
 
 public class UpdateElevator extends CommandBase {
     private Elevator elevator = new Elevator();
-    private boolean upOrDown; // true is up and false is down
-    private double currVelocity;
+    private boolean elevatorMode; // true is up and false is down
 
-    public UpdateElevator(boolean upOrDown) {
-        this.upOrDown = upOrDown;
+    public UpdateElevator(boolean elevatorMode) {
+        this.elevatorMode = elevatorMode;
     }
 
     @Override
     public void execute() {
-        if(upOrDown){
+        if(elevatorMode){
             elevator.setPosition(MAX_HEIGHT);
         }else{
             elevator.setPosition(-MAX_HEIGHT);
