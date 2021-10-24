@@ -16,4 +16,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static class Elevator{
+        public static final boolean inverted = false;
+        public static final double kP = 0.2;
+        public static final double kI = 0;
+        public static final double kD = 0.02;
+        public static final double kF = 0;
+        public static final int ACCELERATION = 0;
+        public static final int MAX_VELOCITY = 0;
+        public static final double MAX_HEIGHT = 0; // maximum height of the elevator [ticks]
+        public static final double DRUM_RADIUS = 0;
+        public static final double TICKS_PER_METER = 2 * Math.PI * DRUM_RADIUS / 4096;
+    }
 }
