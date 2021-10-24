@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Elevator.commands.UpdateElevator;
+
+import static frc.robot.Ports.Elevator.XBOX;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -20,7 +23,8 @@ import frc.robot.subsystems.Elevator.commands.UpdateElevator;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private Button a = new Button();
+  XboxController xboxController = new XboxController(XBOX);
+  JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
   private boolean elevatorMode = true;
 
   // The robot's subsystems and commands are defined here...
