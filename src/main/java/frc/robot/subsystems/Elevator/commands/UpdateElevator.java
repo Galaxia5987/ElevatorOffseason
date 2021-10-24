@@ -8,7 +8,7 @@ import static frc.robot.Constants.Elevator.*;
 public class UpdateElevator extends CommandBase {
     private Elevator elevator = new Elevator();
     private boolean elevatorMode; // true is up and false is down
-
+ 
     public UpdateElevator(boolean elevatorMode) {
         this.elevatorMode = elevatorMode;
     }
