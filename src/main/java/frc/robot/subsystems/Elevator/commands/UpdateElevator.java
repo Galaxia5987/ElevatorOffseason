@@ -5,12 +5,12 @@ import frc.robot.subsystems.Elevator.Elevator;
 
 import static frc.robot.Constants.Elevator.*;
 
-public class UpAndDownUwu extends CommandBase {
+public class UpdateElevator extends CommandBase {
     private Elevator elevator = new Elevator();
     private boolean upOrDown; // true is up and false is down
     private double currVelocity;
 
-    public UpAndDownUwu(boolean upOrDown) {
+    public UpdateElevator(boolean upOrDown) {
         this.upOrDown = upOrDown;
     }
 

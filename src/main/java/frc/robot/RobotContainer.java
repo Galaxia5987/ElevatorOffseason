@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.subsystems.Elevator.commands.UpAndDownUwu;
+import frc.robot.subsystems.Elevator.commands.UpdateElevator;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -44,7 +44,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    a.whenPressed(new UpAndDownUwu(UpOrDown));
+    a.whenPressed(new UpdateElevator(UpOrDown));
   }
 
 
