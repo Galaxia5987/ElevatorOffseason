@@ -17,15 +17,15 @@ package frc.robot;
  */
 public final class Constants {
     public static class Elevator{
-        public static final boolean INVERTED = false;
-        public static final double kP = 0.2;
-        public static final double kI = 0;
-        public static final double kD = 0.02;
-        public static final double kF = 0.4;
-        public static final int ACCELERATION = 2; // the acceleration for the trapezoid control mode. [m/s^2]
-        public static final int MAX_VELOCITY = 1; // the cruise velocity. [m/s]
-        public static final double MAX_HEIGHT = 0; // maximum height of the elevator. [ticks]
-        public static final double DRUM_RADIUS = 0.03; // radius of the elevator drum. [m]
+        public static final boolean INVERTED = false; // Whether the motor is inverted.
+        public static final double kP = 0.2; // Proportional constant.
+        public static final double kI = 0; // Integral constant.
+        public static final double kD = 0.02; // Derivative constant.
+        public static final double kF = 0.4; // Takes into account the force that gravity applies (feed forward).
+        public static final int ACCELERATION = 2; // The acceleration for the trapezoid control mode. [m/s^2]
+        public static final int MAX_VELOCITY = 1; // The cruise velocity. [m/s]
+        public static final double MAX_HEIGHT = 0; // Maximum height of the elevator. [ticks]
+        public static final double DRUM_RADIUS = 0.03; // Radius of the elevator drum. [m]
         public static final double TICKS_PER_METER = 2 * Math.PI * DRUM_RADIUS / 4096; // [tick]
     }
 }

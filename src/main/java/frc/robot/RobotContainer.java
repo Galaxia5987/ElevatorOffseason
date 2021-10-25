@@ -29,6 +29,10 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
 
+  /**
+   * Method used to change the mode of the elevator (see command for details).
+   * @param elevatorMode whether the elevator is going up or down.
+   */
   public void setElevatorMode(boolean elevatorMode){
     this.elevatorMode = elevatorMode;
   }

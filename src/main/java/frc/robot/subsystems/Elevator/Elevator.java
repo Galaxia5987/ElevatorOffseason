@@ -12,6 +12,9 @@ public class Elevator {
     private UnitModel unitMan = new UnitModel(TICKS_PER_METER);
     private TalonFX motor = new TalonFX(ELE_MOTOR);
 
+    /**
+     * Configure the elevator motor.
+     */
     public Elevator() {
         motor.setSelectedSensorPosition(SENSOR_POS);
         motor.setInverted(INVERTED);
@@ -24,10 +27,18 @@ public class Elevator {
         motor.config_kF(PID_X, kF);
     }
 
+    /**
+     * Gets the position of the motor (used for debugging).
+     * @return the position of the motor. [ticks]
+     */
     public double getPosition(){
         return motor.getSelectedSensorPosition();
     }
 
+    /**
+     * Set the position the motor needs to move using motion magic.
+     * @param position is self-explanatory. [ticks]
+     */
     public void setPosition(double position){
         motor.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, kF);
     }
