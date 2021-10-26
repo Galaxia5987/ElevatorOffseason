@@ -23,13 +23,14 @@ public final class Constants {
         public static final double MINIMUM_HIGHT = 0; //[m]
         public static final double MAX_VELOCITY = 0; //[m/sec]
         public static final double ACCELERATION = 0; //[m/sec^2]
-        public static final double TICKS_PER_MINUTE = 0;
         public static final double KI = 0;
         public static final double KP = 0;
         public static final double KD = 0;
         public static final double KF = 0;
         public static final boolean SENSORPHASE = true;
         public static final boolean IS_MOTOR_INVERTED = true;
+        public static final double THICKS_PER_METER = 0;
+
 
 
 

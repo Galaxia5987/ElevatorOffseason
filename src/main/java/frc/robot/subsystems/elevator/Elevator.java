@@ -10,9 +10,11 @@ import static frc.robot.Port.Elevator.motorPort;
 
 public class Elevator extends SubsystemBase {
     private TalonFX motor = new TalonFX(motorPort);
-    private UnitModel unitModel = new UnitModel();
+    private UnitModel unitModel = new UnitModel(THICKS_PER_METER);
+    private static final Elevator INSTANCE = new Elevator();
 
-    public Elevator() {
+
+    private Elevator() {
 
         motor.setInverted(IS_MOTOR_INVERTED);
         motor.setSensorPhase(SENSORPHASE);
@@ -25,11 +27,15 @@ public class Elevator extends SubsystemBase {
         motor.configMotionCruiseVelocity(unitModel.toTicks100ms(MAX_VELOCITY));
         motor.configMotionAcceleration(unitModel.toTicks100ms(ACCELERATION));
     }
+    public static Elevator getInstance(){
+        return INSTANCE;
+    }
+
 
     public double getPosition() {
         return unitModel.toUnits(motor.getSelectedSensorPosition());
     }
-    public double setPosition(){
-        motor.set(ControlMode.MotionMagic, 8000);
+    public void setPosition(double position){
+        motor.set(ControlMode.MotionMagic, unitModel.toTicks(position));
     }
 }
