@@ -7,11 +7,14 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.Elevator.Elevator;
+import frc.robot.subsystems.Elevator.commands.SlowMovement;
+import frc.robot.subsystems.Elevator.commands.TestElevator;
 import frc.robot.subsystems.Elevator.commands.UpdateElevator;
 
 import static frc.robot.Ports.Elevator.XBOX;
@@ -23,47 +26,53 @@ import static frc.robot.Ports.Elevator.XBOX;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  XboxController xboxController = new XboxController(XBOX);
-  JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
-  private boolean elevatorMode = true;
+    XboxController xboxController = new XboxController(XBOX);
+    JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
+    JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
+    JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
+    private boolean elevatorMode = true;
+    private Elevator elevator = Elevator.getInstance();
 
-  // The robot's subsystems and commands are defined here...
+    // The robot's subsystems and commands are defined here...
 
-  /**
-   * Method used to change the mode of the elevator (see command for details).
-   * @param elevatorMode whether the elevator is going up or down.
-   */
-  public void setElevatorMode(boolean elevatorMode){
-    this.elevatorMode = elevatorMode;
-  }
+    /**
+     * The container for the robot.  Contains subsystems, OI devices, and commands.
+     */
+    public RobotContainer() {
+        // Configure the button bindings
+        configureButtonBindings();
+    }
 
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
+    /**
+     * Method used to change the mode of the elevator (see command for details).
+     *
+     * @param elevatorMode whether the elevator is going up or down.
+     */
+    public void setElevatorMode(boolean elevatorMode) {
+        this.elevatorMode = elevatorMode;
+    }
 
-  /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-    a.whenPressed(new UpdateElevator(elevatorMode));
-  }
+    /**
+     * Use this method to define your button->command mappings.  Buttons can be created by
+     * instantiating a {@link GenericHID} or one of its subclasses ({@link
+     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
+     * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+     */
+    private void configureButtonBindings() {
+        a.whenPressed(new UpdateElevator(elevator, elevatorMode));
+        b.whenPressed(new TestElevator(elevator, elevatorMode));
+        x.whenPressed(new SlowMovement(elevator, elevatorMode));
+    }
 
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
+    /**
+     * Use this to pass the autonomous command to the main {@link Robot} class.
+     *
+     * @return the command to run in autonomous
+     */
+    public Command getAutonomousCommand() {
 
-    // An ExampleCommand will run in autonomous
-    return null;
-  }
+        // An ExampleCommand will run in autonomous
+        return null;
+    }
 }
