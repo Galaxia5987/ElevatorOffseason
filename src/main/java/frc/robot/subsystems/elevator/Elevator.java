@@ -27,7 +27,8 @@ public class Elevator extends SubsystemBase {
         motor.configMotionCruiseVelocity(unitModel.toTicks100ms(MAX_VELOCITY));
         motor.configMotionAcceleration(unitModel.toTicks100ms(ACCELERATION));
     }
-    public static Elevator getInstance(){
+
+    public static Elevator getInstance() {
         return INSTANCE;
     }
 
@@ -35,7 +36,8 @@ public class Elevator extends SubsystemBase {
     public double getPosition() {
         return unitModel.toUnits(motor.getSelectedSensorPosition());
     }
-    public void setPosition(double position){
+
+    public void setPosition(double position) {
         motor.set(ControlMode.MotionMagic, unitModel.toTicks(position));
     }
 }
