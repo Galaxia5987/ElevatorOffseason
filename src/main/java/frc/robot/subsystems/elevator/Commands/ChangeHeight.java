@@ -21,7 +21,7 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public void execute() {
-        elevator.setPosition();
+        elevator.goToJoe(Elevator.Position.highJoe);
     }
 
     @Override
@@ -33,7 +33,5 @@ public class ChangeHeight extends CommandBase {
     public boolean isFinished() {
         return false;
     }
-    enum floor{
-        pos1tion1, position2, position3
-    }
+
 }

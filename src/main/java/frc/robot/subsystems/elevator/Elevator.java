@@ -9,6 +9,7 @@ import static frc.robot.Constants.Elevator.*;
 import static frc.robot.Port.Elevator.motorPort;
 
 public class Elevator extends SubsystemBase {
+    public static Position;
     private TalonFX motor = new TalonFX(motorPort);
     private UnitModel unitModel = new UnitModel(THICKS_PER_METER);
     private static final Elevator INSTANCE = new Elevator();
@@ -39,5 +40,27 @@ public class Elevator extends SubsystemBase {
 
     public void setPosition(double position) {
         motor.set(ControlMode.MotionMagic, unitModel.toTicks(position));
+    }
+
+    public enum Position {
+        highJoe, lowJow
+    }
+
+    public void setPower(double power) {
+        motor.set(ControlMode.PercentOutput, power);
+    }
+
+    public void goToJoe(Position position) {
+        {
+            switch (position) {
+                case highJoe:
+                    setPosition(MAXIMUM_HIGHT);
+                    break;
+                case lowJow:
+                    setPosition(MINIMUM_HIGHT);
+                    break;
+            }
+        }
+
     }
 }
