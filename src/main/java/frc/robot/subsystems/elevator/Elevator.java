@@ -67,15 +67,16 @@ public class Elevator extends SubsystemBase {
     }
     public boolean IsAtTop(){
         if (toplimitSwitch.get()){
-            motor.set(ControlMode.PercentOutput, 0);
+            return true;
         }
-
+        return false;
 
     }
     public boolean IsAtBottom() {
-        if (bottomlimitSwitch.get()) {
-            motor.set(ControlMode.PercentOutput, 0);
+        if (bottomlimitSwitch.get()){
+            return true;
         }
+        return false;
 
     }
 }

@@ -31,7 +31,12 @@ public class MaxMin extends CommandBase {
 
     @Override
     public boolean isFinished() {
-
-        return false;
+        if (position == Elevator.Position.highJoe) {
+            return elevator.IsAtTop();
+        }
+        else {
+            return elevator.IsAtBottom();
+        }
     }
+
 }
