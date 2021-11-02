@@ -8,8 +8,9 @@ public class Ports {
         public static final int PID_I = 0;
         public static final int PID_D = 0;
         public static final int PID_F = 0;
-        public static final boolean IS_SWITCHED = true;
-        public static final boolean 
+        public static final int TOP_LIMIT_SWITCH = 0;
+        public static final int BOTTOM_LIMIT_SWITCH = 1;
+        public static final int JOYSTICK = 0;
     }
 
 }
