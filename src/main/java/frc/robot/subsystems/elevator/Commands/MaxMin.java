@@ -3,13 +3,13 @@ package frc.robot.subsystems.elevator.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.elevator.Elevator;
 
-public class ChangeHeight extends CommandBase {
-    private final Elevator elevator;
-    private double requiredHeight;
+public class MaxMin extends CommandBase {
+    private Elevator elevator;
+    private Elevator.Position position;
 
-    public ChangeHeight(Elevator elevator, double requiredHeight) {
+    public MaxMin(Elevator elevator, Elevator.Position position) {
         this.elevator = elevator;
-        this.requiredHeight = requiredHeight;
+        this.position = position;
         addRequirements(elevator);
     }
 
@@ -21,7 +21,7 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public void execute() {
-
+        elevator.goToJoe(position);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public boolean isFinished() {
+
         return false;
     }
-
 }

@@ -2,6 +2,8 @@ package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.UnitModel;
 
@@ -9,9 +11,10 @@ import static frc.robot.Constants.Elevator.*;
 import static frc.robot.Port.Elevator.motorPort;
 
 public class Elevator extends SubsystemBase {
-    public static Position;
     private TalonFX motor = new TalonFX(motorPort);
     private UnitModel unitModel = new UnitModel(THICKS_PER_METER);
+    DigitalInput toplimitSwitch = new DigitalInput(0);
+    DigitalInput bottomlimitSwitch = new DigitalInput(1);
     private static final Elevator INSTANCE = new Elevator();
 
 
@@ -43,7 +46,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public enum Position {
-        highJoe, lowJow
+        highJoe, lowJoe
     }
 
     public void setPower(double power) {
@@ -51,15 +54,27 @@ public class Elevator extends SubsystemBase {
     }
 
     public void goToJoe(Position position) {
-        {
-            switch (position) {
-                case highJoe:
-                    setPosition(MAXIMUM_HIGHT);
-                    break;
-                case lowJow:
-                    setPosition(MINIMUM_HIGHT);
-                    break;
-            }
+
+        switch (position) {
+            case highJoe:
+                setPosition(MAXIMUM_HIGHT);
+                break;
+            case lowJoe:
+                setPosition(MINIMUM_HIGHT);
+                break;
+        }
+
+    }
+    public boolean IsAtTop(){
+        if (toplimitSwitch.get()){
+            motor.set(ControlMode.PercentOutput, 0);
+        }
+
+
+    }
+    public boolean IsAtBottom() {
+        if (bottomlimitSwitch.get()) {
+            motor.set(ControlMode.PercentOutput, 0);
         }
 
     }
