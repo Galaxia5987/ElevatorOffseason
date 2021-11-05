@@ -55,8 +55,7 @@ public class Elevator extends SubsystemBase {
     }
 
     /**
-     * get bottom limit switch.
-     * @return bottom limit switch.
+     * get position.
      */
 
     public double getPosition() {
