@@ -10,17 +10,18 @@ import frc.robot.Ports;
 import frc.robot.subsystems.UnitModel;
 
 public class Elevator extends SubsystemBase {
+
+    private static final Elevator INSTANCE = new Elevator();
     public static TalonFX motor = new TalonFX(Constants.Elevator.MOTOR);
     public static UnitModel unitModel = new UnitModel(Constants.Elevator.UNIT_MODEL);
     public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
     public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
-    public static Joystick joystick = new Joystick(Ports.Elevator.JOYSTICK);
-    private static final Elevator INSTANCE = new Elevator();
-    public static Elevator getInstance(){
-        return INSTANCE;
-    }
 
-    public Elevator() { motor.setSelectedSensorPosition(0);
+    /**
+     * Add PID.
+     */
+    public Elevator() {
+        motor.setSelectedSensorPosition(0);
         motor.setSensorPhase(Ports.Elevator.SENSOR_PHASE);
         motor.setInverted(Ports.Elevator.MOTOR_INVERTED);
         motor.config_kP(0, Ports.Elevator.PID_P);
@@ -29,20 +30,53 @@ public class Elevator extends SubsystemBase {
         motor.config_kF(0, Ports.Elevator.PID_F);
     }
 
-    public boolean atTop() {
-       return topLimitSwitch.get();
+    /**
+     * Create object.
+     * @return
+     */
+    public static Elevator getInstance() {
+        return INSTANCE;
     }
 
+    /**
+     * get top limit switch.
+     * @return top limit switch.
+     */
+    public boolean atTop() {
+        return topLimitSwitch.get();
+    }
+
+    /**
+     * get bottom limit switch.
+     * @return bottom limit switch.
+     */
     public boolean atBottom() {
         return bottomLimitSwitch.get();
     }
+
+    /**
+     * get bottom limit switch.
+     * @return bottom limit switch.
+     */
 
     public double getPosition() {
         return unitModel.toUnits(motor.getSelectedSensorPosition());
     }
 
-    public void setPosition(double position){
+    /**
+     * set position in ticks.
+     */
+    public void setPosition(double position) {
         motor.set(ControlMode.MotionMagic, unitModel.toTicks(position));
     }
+
+    /**
+     * set power.
+     * @param power [%]
+     */
+    public void setPower(double power) {
+        motor.set(ControlMode.PercentOutput, power);
     }
+
+}
 

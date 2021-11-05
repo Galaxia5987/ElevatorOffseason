@@ -3,6 +3,9 @@ package frc.robot.subsystems.elevator.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.elevator.Elevator;
 
+/**
+ * Add parameters elevator&height.
+ */
 public class Command extends CommandBase {
     private final Elevator elevator;
     private final double height;

@@ -10,7 +10,6 @@ public class Ports {
         public static final int PID_F = 0;
         public static final int TOP_LIMIT_SWITCH = 0;
         public static final int BOTTOM_LIMIT_SWITCH = 1;
-        public static final int JOYSTICK = 0;
     }
 
 }

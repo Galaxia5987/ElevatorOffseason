@@ -29,5 +29,8 @@ public final class Constants {
         public static final int TICKS = 2048;
         public static final double CENTIMETER_PER_UNIT = DIAMETER*3.14;
         public static final int UNIT_MODEL = 0;
+        public static final int TOP = 0;
+        public static final int BOTTOM = 0;
+        public static final double LS_POWER = 0.05;
     }
 }
