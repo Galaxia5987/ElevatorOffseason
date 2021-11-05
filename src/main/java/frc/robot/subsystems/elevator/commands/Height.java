@@ -6,11 +6,11 @@ import frc.robot.subsystems.elevator.Elevator;
 /**
  * Add parameters elevator&height.
  */
-public class Command extends CommandBase {
+public class Height extends CommandBase {
     private final Elevator elevator;
     private final double height;
 
-    public Command(Elevator elevator, double height) {
+    public Height(Elevator elevator, double height) {
         this.elevator = elevator;
         this.height = height;
         addRequirements(elevator);
