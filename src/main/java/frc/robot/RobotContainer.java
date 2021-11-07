@@ -44,15 +44,6 @@ public class RobotContainer {
     }
 
     /**
-     * Method used to change the mode of the elevator (see command for details).
-     *
-     * @param elevatorMode whether the elevator is going up or down.
-     */
-    public void setElevatorMode(boolean elevatorMode) {
-        this.elevatorMode = elevatorMode;
-    }
-
-    /**
      * Use this method to define your button->command mappings.  Buttons can be created by
      * instantiating a {@link GenericHID} or one of its subclasses ({@link
      * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
@@ -62,6 +53,7 @@ public class RobotContainer {
         a.whenPressed(new UpdateElevator(elevator, elevatorMode));
         b.whenPressed(new TestElevator(elevator, elevatorMode));
         x.whenPressed(new SlowMovement(elevator, elevatorMode));
+        elevatorMode = !elevatorMode;
     }
 
 

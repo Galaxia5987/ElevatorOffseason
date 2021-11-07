@@ -7,5 +7,6 @@ public class Ports {
         public static final int ELE_MOTOR = 0; // The port of the motor.
         public static final int PID_X = 0; // The slot of the PID.
         public static final int XBOX = 0; // The port of the Xbox controller.
+        public static final int DIGITAL_INPUT = 0;
     }
 }
