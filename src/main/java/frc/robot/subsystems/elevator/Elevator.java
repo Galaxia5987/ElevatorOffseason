@@ -12,8 +12,8 @@ import frc.robot.subsystems.UnitModel;
 public class Elevator extends SubsystemBase {
 
     private static final Elevator INSTANCE = new Elevator();
-    public static TalonFX motor = new TalonFX(Constants.Elevator.MOTOR);
-    public static UnitModel unitModel = new UnitModel(Constants.Elevator.UNIT_MODEL);
+    public static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
+    public static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
     public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
     public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
 
@@ -76,6 +76,7 @@ public class Elevator extends SubsystemBase {
     public void setPower(double power) {
         motor.set(ControlMode.PercentOutput, power);
     }
+
 
 }
 

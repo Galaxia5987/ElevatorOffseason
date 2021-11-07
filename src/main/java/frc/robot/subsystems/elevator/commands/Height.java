@@ -1,6 +1,7 @@
 package frc.robot.subsystems.elevator.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.elevator.Elevator;
 
 /**
@@ -27,10 +28,11 @@ public class Height extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        elevator.setPower(0);
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return Math.abs(height - elevator.getPosition()) < Constants.Elevator.HEIGHT;
     }
 }
