@@ -20,8 +20,8 @@ public final class Constants {
 
     public static final class Elevator {
         public static final double DIAMETER = 0.05; // [m]
-        public static final int MAX_VELOCITY = 0;
-        public static final int ACCELERATION = 0;
+        public static final double MAX_VELOCITY = 2; // [m/s]
+        public static final double ACCELERATION = 0.5; // [m/s^2]
         public static final int F = 0;
         public static final int K = 0;
         public static final int POWER_UP = F + K;
@@ -33,6 +33,6 @@ public final class Constants {
         public static final int TOP = 0;
         public static final int BOTTOM = 0;
         public static final double LS_POWER = 0.05;
-        public static final int HEIGHT = 5; //[cm]
+        public static final double HEIGHT = 0.05; //[m]
     }
 }

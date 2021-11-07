@@ -11,11 +11,11 @@ import frc.robot.subsystems.UnitModel;
 
 public class Elevator extends SubsystemBase {
 
-    private static final Elevator INSTANCE = new Elevator();
     public static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
     public static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
     public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
     public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
+    private static final Elevator INSTANCE = new Elevator();
 
     /**
      * Add PID.
@@ -28,6 +28,9 @@ public class Elevator extends SubsystemBase {
         motor.config_kI(0, Ports.Elevator.PID_I);
         motor.config_kD(0, Ports.Elevator.PID_D);
         motor.config_kF(0, Ports.Elevator.PID_F);
+
+        motor.configMotionAcceleration(unitModel.toTicks100ms(Constants.Elevator.ACCELERATION));
+        motor.configMotionCruiseVelocity(unitModel.toTicks100ms(Constants.Elevator.MAX_VELOCITY));
     }
 
     /**
@@ -66,6 +69,7 @@ public class Elevator extends SubsystemBase {
      * set position in ticks.
      */
     public void setPosition(double position) {
+        System.out.println("ticks: " + unitModel.toTicks(position));
         motor.set(ControlMode.MotionMagic, unitModel.toTicks(position));
     }
 

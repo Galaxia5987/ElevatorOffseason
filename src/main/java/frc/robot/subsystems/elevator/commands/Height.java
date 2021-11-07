@@ -24,6 +24,7 @@ public class Height extends CommandBase {
     @Override
     public void execute() {
         elevator.setPosition(height);
+        System.out.println("position: " + elevator.getPosition());
     }
 
     @Override

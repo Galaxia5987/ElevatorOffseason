@@ -49,7 +49,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         a.whenPressed(new Height(elevator, 0.5));
         b.whenPressed(new Height(elevator, 1));
-        y.whenPressed(new Height(elevator, 1.9));
+        y.whenPressed(new Height(elevator, 1.8));
         x.whenPressed(new Height(elevator, 0));
     }
 
