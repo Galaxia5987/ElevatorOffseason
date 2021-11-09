@@ -27,20 +27,23 @@ public final class Constants {
     public static final double LOOP_PERIOD = 0.02; // [s]
 
     public static class Elevator {
-        public static final boolean INVERTED = false; // Whether the motor is inverted.
+        public static final int ACCELERATION = 2; // The acceleration for the trapezoid control mode. [m/s^2]
+        public static final int MAX_VELOCITY = 1; // The cruise velocity. [m/s]
+
         public static final double kP = 0.2; // Proportional constant.
         public static final double kI = 0; // Integral constant.
         public static final double kD = 0.02; // Derivative constant.
-        public static final double kF = 0.4; // Takes into account the force that gravity applies (feed forward).
         public static final double MAX_HEIGHT = 1.8; // Maximum height of the elevator. [m]
         public static final double DRUM_RADIUS = 0.03; // Radius of the elevator drum. [m]
         public static final double SLOW_MOVEMENT = MAX_HEIGHT / 5; // Makes the elevator finish moving at 5s. [m/s]
         public static final double TICKS_PER_METER = 2 * Math.PI * DRUM_RADIUS / 4096; // [tick]
-        public static final int ACCELERATION = 2; // The acceleration for the trapezoid control mode. [m/s^2]
-        public static final int MAX_VELOCITY = 1; // The cruise velocity. [m/s]
-        public static final double G = 1 / 10.0;
+        public static final double g = 9.80665;
+        public static final double G = 1 / 10.0; // gear ratio
         public static final double radius = 0; // [m]
         public static final double mass = 0; // [kg]
+        public static final double kF = (Falcon.R * radius * mass * mass * g) / (G * Falcon.Kt); // Takes into account the force that gravity applies (feed forward).
+
+        public static final boolean INVERTED = false; // Whether the motor is inverted.
 
         public static final Matrix<N2, N1> MODEL_TOLERANCE = Matrix.mat(Nat.N2(), Nat.N1()).fill(
                 0.0508,
@@ -60,14 +63,14 @@ public final class Constants {
     }
 
     public static class Falcon {
-        public static final double nominalVoltage = 12; // [volt]
-        public static final double stallTorque = 4.69; // [N*m]
-        public static final double stallCurrent = 257; // [amps]
-        public static final double freeCurrent = 1.5; // [amps]
-        public static final double freeSpeed = 6380 * Math.PI * 2 / 60.0; // [rad/s]
+        public static final double NOMINAL_VOLTAGE = 12; // [volt]
+        public static final double STALL_TORQUE = 4.69; // [N*m]
+        public static final double STALL_CURRENT = 257; // [amps]
+        public static final double FREE_CURRENT = 1.5; // [amps]
+        public static final double FREE_SPEED = 6380 * Math.PI * 2 / 60.0; // [rad/s]
 
-        public static final double R = nominalVoltage / stallCurrent; // [ohms]
-        public static final double Kv = freeSpeed / (nominalVoltage - R * freeCurrent); // [rad/s*volt]
-        public static final double Kt = stallTorque / stallCurrent; // [N*m/amps]
+        public static final double R = NOMINAL_VOLTAGE / STALL_CURRENT; // [ohms]
+        public static final double Kv = FREE_SPEED / (NOMINAL_VOLTAGE - R * FREE_CURRENT); // [rad/s*volt]
+        public static final double Kt = STALL_TORQUE / STALL_CURRENT; // [N*m/amps]
     }
 }

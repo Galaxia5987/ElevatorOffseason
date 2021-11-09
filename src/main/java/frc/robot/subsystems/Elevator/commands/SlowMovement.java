@@ -9,9 +9,8 @@ public class SlowMovement extends CommandBase {
     private final Elevator elevator;
     private boolean elevatorMode; // True is up and false is down.
 
-    public SlowMovement(Elevator elevator, boolean elevatorMode) {
+    public SlowMovement(Elevator elevator) {
         this.elevator = elevator;
-        this.elevatorMode = elevatorMode;
     }
 
     public void setElevatorMode() {

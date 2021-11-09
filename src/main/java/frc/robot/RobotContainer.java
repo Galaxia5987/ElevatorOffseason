@@ -30,7 +30,6 @@ public class RobotContainer {
     JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
-    private boolean elevatorMode = true;
     private Elevator elevator = Elevator.getInstance();
 
     // The robot's subsystems and commands are defined here...
@@ -50,10 +49,9 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        a.whenPressed(new UpdateElevator(elevator, elevatorMode));
-        b.whenPressed(new TestElevator(elevator, elevatorMode));
-        x.whenPressed(new SlowMovement(elevator, elevatorMode));
-        elevatorMode = !elevatorMode;
+        a.whenPressed(new UpdateElevator(elevator));
+        b.whenPressed(new TestElevator(elevator));
+        x.whenPressed(new SlowMovement(elevator));
     }
 
 

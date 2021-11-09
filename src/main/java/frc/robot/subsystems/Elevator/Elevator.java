@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.controller.LinearQuadraticRegulator;
 import edu.wpi.first.wpilibj.estimator.KalmanFilter;
 import edu.wpi.first.wpilibj.system.LinearSystem;
 import edu.wpi.first.wpilibj.system.LinearSystemLoop;
+import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpiutil.math.Matrix;
 import edu.wpi.first.wpiutil.math.Nat;
+import edu.wpi.first.wpiutil.math.VecBuilder;
 import edu.wpi.first.wpiutil.math.numbers.N1;
 import edu.wpi.first.wpiutil.math.numbers.N2;
 import frc.robot.subsystems.UnitModel;
@@ -20,11 +22,14 @@ import static frc.robot.Constants.LOOP_PERIOD;
 import static frc.robot.Ports.Elevator.*;
 
 public class Elevator {
+    private static boolean elevatorMode;
     public static final TalonFX motor = new TalonFX(ELE_MOTOR);
-    private static final Elevator INSTANCE = new Elevator();
+    private static final Elevator INSTANCE = new Elevator(elevatorMode);
     private final UnitModel unitMan = new UnitModel(TICKS_PER_METER);
+
     DigitalInput limitSwitchTop = new DigitalInput(DIGITAL_INPUT);
     DigitalInput limitSwitchBottom = new DigitalInput(DIGITAL_INPUT);
+
     private Matrix<N2, N2> A;
     private Matrix<N2, N1> B;
     private Matrix<N1, N2> C;
@@ -34,10 +39,23 @@ public class Elevator {
     private LinearQuadraticRegulator<N2, N1, N1> lqr;
     private LinearSystemLoop<N2, N1, N1> linearSystemLoop;
 
+    private TrapezoidProfile.State lastTrapezoidState;
+    private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
+            ACCELERATION, MAX_VELOCITY
+    );
+    private TrapezoidProfile.State goal;
+
     /**
      * Configure the elevator motor.
      */
-    private Elevator() {
+    private Elevator(boolean elevatorMode) {
+        this.elevatorMode = elevatorMode;
+
+        lastTrapezoidState = new TrapezoidProfile.State(getPosition(), getVelocity());
+        goal = new TrapezoidProfile.State(
+                unitMan.toTicks(elevatorMode ? MAX_HEIGHT : -MAX_HEIGHT), 0
+        );
+
         motor.setSensorPhase(SENSOR_PHASE);
         motor.setSelectedSensorPosition(SENSOR_POS);
         motor.setInverted(INVERTED);
@@ -71,19 +89,19 @@ public class Elevator {
         );
 
         elevator = new LinearSystem<>(
-            A,
-            B,
-            C,
-            D
+                A,
+                B,
+                C,
+                D
         );
 
         kalmanFilter = new KalmanFilter<>(
-            Nat.N2(),
-            Nat.N1(),
-            elevator,
-            MODEL_TOLERANCE,
-            SENSOR_TOLERANCE,
-            LOOP_PERIOD
+                Nat.N2(),
+                Nat.N1(),
+                elevator,
+                MODEL_TOLERANCE,
+                SENSOR_TOLERANCE,
+                LOOP_PERIOD
         );
 
         lqr = new LinearQuadraticRegulator<>(
@@ -97,7 +115,7 @@ public class Elevator {
                 elevator,
                 lqr,
                 kalmanFilter,
-                nominalVoltage,
+                NOMINAL_VOLTAGE,
                 LOOP_PERIOD
         );
     }
@@ -127,21 +145,29 @@ public class Elevator {
         return unitMan.toUnits(motor.getSelectedSensorPosition());
     }
 
-    /**
-     * Set the position the motor needs to move using motion magic.
-     *
-     * @param position is the position of the elevator. [m]
-     */
-    public void setPosition(double position) {
-//        motor.set(ControlMode.MotionMagic, unitMan.toTicks(position), DemandType.ArbitraryFeedForward, kF);
+
+    public double getVelocity() {
+        return unitMan.toVelocity(motor.getSelectedSensorVelocity());
     }
 
-    public void setPower(double position) {
-        linearSystemLoop.getU();
-    }
+//    public void setPosition(double position) {
+//        motor.set(ControlMode.MotionMagic, unitMan.toTicks(position), DemandType.ArbitraryFeedForward, kF);
+//    }
 
     public void setVelocity(double velocity) {
         motor.set(ControlMode.Velocity, unitMan.toTicks100ms(velocity));
+    }
+
+    public void setPosition(double timeInterval) {
+        lastTrapezoidState =
+                (new TrapezoidProfile(constraints, goal, lastTrapezoidState)).calculate(LOOP_PERIOD);
+
+        linearSystemLoop.setNextR(lastTrapezoidState.velocity, lastTrapezoidState.position);
+        linearSystemLoop.correct(VecBuilder.fill(lastTrapezoidState.position));
+        linearSystemLoop.predict(timeInterval);
+
+        double output = linearSystemLoop.getU(0) / NOMINAL_VOLTAGE;
+        motor.set(ControlMode.PercentOutput, output, DemandType.ArbitraryFeedForward, kF);
     }
 
     public void terminate() {

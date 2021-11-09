@@ -1,12 +1,12 @@
 package frc.robot.subsystems.Elevator.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Elevator.Elevator;
 
-import static frc.robot.Constants.Elevator.MAX_HEIGHT;
-
 public class TestElevator extends CommandBase {
+    private double lastTime = 0, currTime;
+    private Timer timer = new Timer();
     private final Elevator elevator;
     private boolean elevatorMode; // True is up and false is down.
 
@@ -16,9 +16,8 @@ public class TestElevator extends CommandBase {
      * @param elevatorMode is a boolean used to decide whether
      *                     the elevator is going up or down.
      */
-    public TestElevator(Elevator elevator, boolean elevatorMode) {
+    public TestElevator(Elevator elevator) {
         this.elevator = elevator;
-        this.elevatorMode = elevatorMode;
     }
 
     public void setElevatorMode() {
@@ -28,6 +27,7 @@ public class TestElevator extends CommandBase {
 
     @Override
     public void initialize() {
+        timer.start();
         setElevatorMode();
     }
 
@@ -36,11 +36,15 @@ public class TestElevator extends CommandBase {
      */
     @Override
     public void execute() {
+        currTime = timer.get();
+
         if (elevatorMode) {
-            elevator.setPosition(MAX_HEIGHT);
+            elevator.setPosition((currTime - lastTime));
         } else {
-            elevator.setPosition(-MAX_HEIGHT);
+            elevator.setPosition((currTime - lastTime));
         }
+
+        lastTime = currTime;
     }
 
     @Override
@@ -50,6 +54,6 @@ public class TestElevator extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return elevatorMode ? (elevator.getPosition() == MAX_HEIGHT) : (elevator.getPosition() == 0);
+        return elevatorMode ? (elevator.atTop()) : (elevator.atBottom());
     }
 }

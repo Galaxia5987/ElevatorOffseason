@@ -1,23 +1,17 @@
 package frc.robot.subsystems.Elevator.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator.Elevator;
 
-import static frc.robot.Constants.Elevator.MAX_HEIGHT;
-
 public class UpdateElevator extends CommandBase {
+    private double lastTime = 0, currTime;
+    private final Timer timer  = new Timer();
     private final Elevator elevator;
     private boolean elevatorMode; // True is up and false is down.
-
-    /**
-     * Constructor.
-     *
-     * @param elevatorMode is a boolean used to decide whether
-     *                     the elevator is going up or down.
-     */
-    public UpdateElevator(Elevator elevator, boolean elevatorMode) {
+    
+    public UpdateElevator(Elevator elevator) {
         this.elevator = elevator;
-        this.elevatorMode = elevatorMode;
     }
 
     public void setElevatorMode() {
@@ -26,6 +20,7 @@ public class UpdateElevator extends CommandBase {
 
     @Override
     public void initialize() {
+        timer.start();
         setElevatorMode();
     }
 
@@ -34,11 +29,15 @@ public class UpdateElevator extends CommandBase {
      */
     @Override
     public void execute() {
+        currTime = timer.get();
+
         if (elevatorMode) {
-            elevator.setPosition(MAX_HEIGHT);
+            elevator.setPosition((currTime - lastTime));
         } else {
-            elevator.setPosition(-MAX_HEIGHT);
+            elevator.setPosition((currTime - lastTime));
         }
+
+        lastTime = currTime;
     }
 
     @Override
