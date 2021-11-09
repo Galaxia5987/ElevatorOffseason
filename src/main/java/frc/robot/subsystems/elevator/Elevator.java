@@ -3,11 +3,11 @@ package frc.robot.subsystems.elevator;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.subsystems.UnitModel;
+import webapp.FireLog;
 
 public class Elevator extends SubsystemBase {
 
@@ -24,10 +24,10 @@ public class Elevator extends SubsystemBase {
         motor.setSelectedSensorPosition(0);
         motor.setSensorPhase(Ports.Elevator.SENSOR_PHASE);
         motor.setInverted(Ports.Elevator.MOTOR_INVERTED);
-        motor.config_kP(0, Ports.Elevator.PID_P);
-        motor.config_kI(0, Ports.Elevator.PID_I);
-        motor.config_kD(0, Ports.Elevator.PID_D);
-        motor.config_kF(0, Ports.Elevator.PID_F);
+        motor.config_kP(0, Constants.Elevator.PID_P.get());
+        motor.config_kI(0, Constants.Elevator.PID_I.get());
+        motor.config_kD(0, Constants.Elevator.PID_D.get());
+        motor.config_kF(0, Constants.Elevator.PID_F.get());
 
         motor.configMotionAcceleration(unitModel.toTicks100ms(Constants.Elevator.ACCELERATION));
         motor.configMotionCruiseVelocity(unitModel.toTicks100ms(Constants.Elevator.MAX_VELOCITY));
@@ -38,6 +38,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * Create object.
+     *
      * @return
      */
     public static Elevator getInstance() {
@@ -46,6 +47,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * get top limit switch.
+     *
      * @return top limit switch.
      */
     public boolean atTop() {
@@ -54,6 +56,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * get bottom limit switch.
+     *
      * @return bottom limit switch.
      */
     public boolean atBottom() {
@@ -78,12 +81,21 @@ public class Elevator extends SubsystemBase {
 
     /**
      * set power.
+     *
      * @param power [%]
      */
     public void setPower(double power) {
         motor.set(ControlMode.PercentOutput, power);
     }
 
+    @Override
+    public void periodic() {
+        FireLog.log("elevator-position", getPosition());
 
+        motor.config_kP(0, Constants.Elevator.PID_P.get());
+        motor.config_kI(0, Constants.Elevator.PID_I.get());
+        motor.config_kD(0, Constants.Elevator.PID_D.get());
+        motor.config_kF(0, Constants.Elevator.PID_F.get());
+    }
 }
 

@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.robot.valuetuner.WebConstant;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -28,12 +30,17 @@ public final class Constants {
         public static final int POWER_UP = F + K;
         public static final int POWER_DOWN = F - K;
         public static final int TICKS = 2048;
-        public static final double GEAR_RATIO = 1.0/10;
-        public static final double TICKS_PER_METER= TICKS/(DIAMETER * Math.PI * GEAR_RATIO);
+        public static final double GEAR_RATIO = 1.0 / 10;
+        public static final double TICKS_PER_METER = TICKS / (DIAMETER * Math.PI * GEAR_RATIO);
         public static final int UNIT_MODEL = 0;
         public static final int TOP = 0;
         public static final int BOTTOM = 0;
         public static final double LS_POWER = 0.05;
         public static final double HEIGHT = 0.05; //[m]
+
+        public static final WebConstant PID_P = new WebConstant("k_p", 0.2);
+        public static final WebConstant PID_I = new WebConstant("k_i", 0);
+        public static final WebConstant PID_D = new WebConstant("k_d", 0);
+        public static final WebConstant PID_F = new WebConstant("k_f", 0);
     }
 }

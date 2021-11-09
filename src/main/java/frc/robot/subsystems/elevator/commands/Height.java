@@ -3,6 +3,7 @@ package frc.robot.subsystems.elevator.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.elevator.Elevator;
+import webapp.FireLog;
 
 /**
  * Add parameters elevator&height.
@@ -24,7 +25,7 @@ public class Height extends CommandBase {
     @Override
     public void execute() {
         elevator.setPosition(height);
-        System.out.println("position: " + elevator.getPosition());
+        FireLog.log("setpoint", height);
     }
 
     @Override
