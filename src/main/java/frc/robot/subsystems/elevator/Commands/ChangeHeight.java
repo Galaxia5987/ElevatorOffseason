@@ -21,7 +21,7 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public void execute() {
-
+        elevator.setPosition(requiredHeight);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return false;
+
     }
 
 }

@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Port;
 import frc.robot.subsystems.UnitModel;
 
 import static frc.robot.Constants.Elevator.*;
@@ -20,7 +21,7 @@ public class Elevator extends SubsystemBase {
 
     private Elevator() {
 
-        motor.setInverted(IS_MOTOR_INVERTED);
+        motor.setInverted(Port.Elevator.IS_MOTOR_INVERTED);
         motor.setSensorPhase(SENSORPHASE);
 
         motor.config_kP(0, KP);

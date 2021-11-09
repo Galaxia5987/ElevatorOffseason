@@ -28,7 +28,6 @@ public final class Constants {
         public static final double KD = 0;
         public static final double KF = 0;
         public static final boolean SENSORPHASE = true;
-        public static final boolean IS_MOTOR_INVERTED = true;
         public static final double THICKS_PER_METER = 0;
         public static final double GEAR_RATIO = 1/10.0;
 
