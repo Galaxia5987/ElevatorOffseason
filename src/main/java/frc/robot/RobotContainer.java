@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.commands.Height;
+import frc.robot.valuetuner.ValueTuner;
+import webapp.Webserver;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -38,6 +40,11 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         configureButtonBindings();
+
+        if (Robot.debug) {
+            startValueTuner();
+            startFireLog();
+        }
     }
 
     /**
@@ -63,5 +70,24 @@ public class RobotContainer {
 
         // An ExampleCommand will run in autonomous
         return null;
+    }
+
+    /**
+     * Initiates the value tuner.
+     */
+    private void startValueTuner() {
+        new ValueTuner().start();
+    }
+
+    /**
+     * Initiates the port of team 225s Fire-Logger.
+     */
+    private void startFireLog() {
+
+        try {
+            new Webserver();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
