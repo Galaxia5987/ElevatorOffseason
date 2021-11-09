@@ -26,11 +26,12 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-
+        elevator.setPower(0);
     }
 
     @Override
     public boolean isFinished() {
+        if (elevator.getPosition())
 
     }
 
