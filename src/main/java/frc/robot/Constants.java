@@ -17,6 +17,7 @@ package frc.robot;
  */
 public final class Constants {
     public static final int TALON_TIMEOUT = 10;
+    public static final double NOMINAL_VOLTAGE = 12;
 
     public static final class Elevator {
         public static final double DIAMETER = 0.05; // [m]

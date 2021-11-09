@@ -31,6 +31,9 @@ public class Elevator extends SubsystemBase {
 
         motor.configMotionAcceleration(unitModel.toTicks100ms(Constants.Elevator.ACCELERATION));
         motor.configMotionCruiseVelocity(unitModel.toTicks100ms(Constants.Elevator.MAX_VELOCITY));
+
+        motor.enableVoltageCompensation(true);
+        motor.configVoltageCompSaturation(Constants.NOMINAL_VOLTAGE);
     }
 
     /**
