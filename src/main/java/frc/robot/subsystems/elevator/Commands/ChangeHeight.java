@@ -31,7 +31,11 @@ public class ChangeHeight extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (elevator.getPosition())
+        if (requiredHeight - elevator.getPosition() < 0.05) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

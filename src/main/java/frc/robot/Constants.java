@@ -19,7 +19,7 @@ public final class Constants {
     public static class Elevator {
         public static final double DIEMETER = 0; //[m]
         public static final double FEADFORWARD = 0;
-        public static final double MAXIMUM_HIGHT = 1.9; //[m]
+        public static final double MAXIMUM_HIGHT = 1.8; //[m]
         public static final double MINIMUM_HIGHT = 0; //[m]
         public static final double MAX_VELOCITY = 0; //[m/sec]
         public static final double ACCELERATION = 0; //[m/sec^2]
@@ -29,9 +29,7 @@ public final class Constants {
         public static final double KF = 0;
         public static final boolean SENSORPHASE = true;
         public static final double THICKS_PER_METER = 0;
-        public static final double GEAR_RATIO = 1/10.0;
-
-
+        public static final double GEAR_RATIO = 1 / 10.0;
         public static final double JOYSTICK_DRIFT = 0.1;
     }
 }
