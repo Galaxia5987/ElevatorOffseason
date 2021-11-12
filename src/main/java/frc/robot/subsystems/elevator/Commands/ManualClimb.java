@@ -20,6 +20,9 @@ public class ManualClimb extends CommandBase {
         elevator.setPower(deadband(-xboxController.getY(GenericHID.Hand.kLeft)));
     }
 
+    /**
+     * neglecting the joystick's drift if the drift is less than 0.1
+     */
     private double deadband(double drift) {
         if (Math.abs(drift) < Constants.Elevator.JOYSTICK_DRIFT)
             return 0;

@@ -29,6 +29,9 @@ public class MaxMin extends CommandBase {
         elevator.setPower(0);
     }
 
+    /**
+     * finishes the program if either the toplimitSwitch or the bottomlimitSwitch returns "true"
+     */
     @Override
     public boolean isFinished() {
         if (position == Elevator.Position.highJoe) {

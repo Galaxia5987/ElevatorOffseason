@@ -54,6 +54,9 @@ public class Elevator extends SubsystemBase {
         motor.set(ControlMode.PercentOutput, power);
     }
 
+    /**
+     * function"goToJoe" has a switch "position", this switch has 2 cases: "highJoe" and "lowJoe". highJoe for - "MAXIMUM_HIGHT" and lowJoe for - MINIMUM_HIGHT
+     */
     public void goToJoe(Position position) {
 
         switch (position) {
@@ -64,14 +67,18 @@ public class Elevator extends SubsystemBase {
                 setPosition(MINIMUM_HIGHT);
                 break;
         }
-
+/**
+ * IsAtTop returns true if the topLimitSwitch returns "true"
+ */
     }
     public boolean IsAtTop(){
         if (toplimitSwitch.get()){
             return true;
         }
         return false;
-
+/**
+ * IsAtBottom returns true if the bottomLimitSwitch returns "true"
+ */
     }
     public boolean IsAtBottom() {
         if (bottomlimitSwitch.get()){

@@ -18,7 +18,7 @@ public class ChangeHeight extends CommandBase {
     public void initialize() {
 
     }
-
+    
     @Override
     public void execute() {
         elevator.setPosition(requiredHeight);
@@ -29,6 +29,9 @@ public class ChangeHeight extends CommandBase {
         elevator.setPower(0);
     }
 
+    /**
+     * finishes the program if gap between requiredHeight and the current height is less than 0.05[m]
+     */
     @Override
     public boolean isFinished() {
         if (requiredHeight - elevator.getPosition() < 0.05) {
