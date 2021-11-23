@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.commands.Height;
+import frc.robot.subsystems.elevator.commands.ManualClimb;
 import frc.robot.valuetuner.ValueTuner;
 import webapp.Webserver;
 
@@ -45,6 +46,7 @@ public class RobotContainer {
             startValueTuner();
             startFireLog();
         }
+        elevator.setDefaultCommand(new ManualClimb(elevator));
     }
 
     /**
@@ -56,7 +58,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         a.whenPressed(new Height(elevator, 0.5));
         b.whenPressed(new Height(elevator, 1));
-        y.whenPressed(new Height(elevator, 1.8));
+//        y.whenPressed(new Height(elevator, 1.8));
         x.whenPressed(new Height(elevator, 0));
     }
 

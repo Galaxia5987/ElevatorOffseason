@@ -91,11 +91,14 @@ public class Elevator extends SubsystemBase {
     @Override
     public void periodic() {
         FireLog.log("elevator-position", getPosition());
+        FireLog.log("elevator-motorVoltage", motor.getMotorOutputVoltage());
 
         motor.config_kP(0, Constants.Elevator.PID_P.get());
         motor.config_kI(0, Constants.Elevator.PID_I.get());
         motor.config_kD(0, Constants.Elevator.PID_D.get());
         motor.config_kF(0, Constants.Elevator.PID_F.get());
+
+
     }
 }
 
