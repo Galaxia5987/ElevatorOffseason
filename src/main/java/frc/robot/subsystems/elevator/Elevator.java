@@ -35,6 +35,9 @@ public class Elevator extends SubsystemBase {
         motor.enableVoltageCompensation(true);
         motor.configVoltageCompSaturation(Constants.NOMINAL_VOLTAGE);
     }
+    public void resetElevator(){
+        motor.setSelectedSensorPosition(0);
+    }
 
     /**
      * Create object.

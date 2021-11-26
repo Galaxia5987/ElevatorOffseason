@@ -30,6 +30,7 @@ public class RobotContainer {
     public static JoystickButton y = new JoystickButton(xboxController, XboxController.Button.kY.value);
     public static JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     public static JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
+    public static JoystickButton start = new JoystickButton(xboxController, XboxController.Button.kStart.value);
 
 
     // The robot's subsystems and commands are defined here...
@@ -58,8 +59,9 @@ public class RobotContainer {
     private void configureButtonBindings() {
         a.whenPressed(new Height(elevator, 0.5));
         b.whenPressed(new Height(elevator, 1));
-//        y.whenPressed(new Height(elevator, 1.8));
+        y.whenPressed(new Height(elevator, 1.8));
         x.whenPressed(new Height(elevator, 0));
+        start.whenPressed(() -> elevator.resetElevator());
     }
 
 
