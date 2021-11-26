@@ -1,5 +1,6 @@
 package frc.robot.subsystems.elevator.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.elevator.Elevator;
@@ -11,6 +12,7 @@ import webapp.FireLog;
 public class Height extends CommandBase {
     private final Elevator elevator;
     private final double height;
+    private Timer timer = new Timer();
 
     public Height(Elevator elevator, double height) {
         this.elevator = elevator;
@@ -20,12 +22,15 @@ public class Height extends CommandBase {
 
     @Override
     public void initialize() {
+        timer.reset();
+        timer.start();
     }
 
     @Override
     public void execute() {
         elevator.setPosition(height);
         FireLog.log("setpoint", height);
+        System.out.println(Math.abs(height - elevator.getPosition()));
     }
 
     @Override
@@ -35,6 +40,14 @@ public class Height extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(height - elevator.getPosition()) < Constants.Elevator.HEIGHT;
+        if (Math.abs(height - elevator.getPosition()) < Constants.Elevator.HEIGHT) {
+            timer.start();
+            elevator.setPower(0);
+
+
+        }
+         return isFinished();
     }
+
 }
+
