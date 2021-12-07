@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Ports.Gripper.*;
 
 public class Gripper extends SubsystemBase {
-    private final VictorSPX motor = new VictorSPX(MOTOR);
+    private final VictorSPX motorRight = new VictorSPX(MOTOR);
+    private final VictorSPX motorLeft = new VictorSPX(MOTOR);
     private final Solenoid solenoid = new Solenoid(SOLENOID);
 
     private final static Gripper INSTANCE = new Gripper();
@@ -21,16 +22,20 @@ public class Gripper extends SubsystemBase {
      * Check if motor inverted
      */
     private Gripper() {
-        motor.setInverted(MOTOR_INVERTED);
+        motorRight.setInverted(RIGHT_MOTOR_INVERTED);
+        motorLeft.setInverted(LEFT_MOTOR_INVERTED);
     }
 
     /**
      * Set power
+     *
      * @param power power to give to the motor
      */
     public void setPower(double power) {
-        motor.set(ControlMode.PercentOutput, power);
+        motorRight.set(ControlMode.PercentOutput, power);
+        motorLeft.set(ControlMode.PercentOutput, power);
     }
+
 
     /**
      * Close solenoid

@@ -33,8 +33,8 @@ public class RobotContainer {
     }
     //robot will intake when left trigger is held and outtake while right trigger is held
     private void configureButtonBindings() {
-        lt.whileActiveContinuous(new Intake(gripper, 10000000));
-        rt.whileActiveContinuous(new Outtake(gripper, -10000000));
+        lt.whileActiveContinuous(new Intake(gripper, 1));
+        rt.whileActiveContinuous(new Outtake(gripper, -1));
     }
 
 

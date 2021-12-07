@@ -22,8 +22,8 @@ public class Outtake extends CommandBase {
     public void execute() {
         gripper.open();
         gripper.setPower(outtakePower);
-    }
 
+    }
     @Override
     public void end(boolean interrupted) {
         gripper.setPower(0);
