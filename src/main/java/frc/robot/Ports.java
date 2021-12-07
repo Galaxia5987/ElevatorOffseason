@@ -2,7 +2,8 @@ package frc.robot;
 
 public class Ports {
     public static class Gripper {
-        public static final int MOTOR = 0;
+        public static final int LEFTMOTOR = 0;
+        public static final int RIGHTMOTOR = 0;
         public static final int SOLENOID = 0;
 
         public static final boolean RIGHT_MOTOR_INVERTED = false;

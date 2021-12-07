@@ -4,12 +4,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Ports;
 
 import static frc.robot.Ports.Gripper.*;
 
 public class Gripper extends SubsystemBase {
-    private final VictorSPX motorRight = new VictorSPX(MOTOR);
-    private final VictorSPX motorLeft = new VictorSPX(MOTOR);
+    private final VictorSPX motorRight = new VictorSPX(RIGHTMOTOR);
+    private final VictorSPX motorLeft = new VictorSPX(LEFTMOTOR);
     private final Solenoid solenoid = new Solenoid(SOLENOID);
 
     private final static Gripper INSTANCE = new Gripper();
@@ -33,7 +34,7 @@ public class Gripper extends SubsystemBase {
      */
     public void setPower(double power) {
         motorRight.set(ControlMode.PercentOutput, power);
-        motorLeft.set(ControlMode.PercentOutput, power);
+        motorLeft.follow(motorRight);
     }
 
 
