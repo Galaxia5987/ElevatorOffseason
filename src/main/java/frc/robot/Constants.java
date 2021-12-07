@@ -43,5 +43,7 @@ public final class Constants {
         public static final WebConstant PID_D = new WebConstant("k_d", 0);
         public static final WebConstant PID_F = new WebConstant("k_f", 0);
         public static final double JOYSTICK_DRIFT = 0.05;
+    public static final class Gripper {
     }
+
 }

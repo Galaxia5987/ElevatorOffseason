@@ -10,6 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.gripper.Gripper;
+import frc.robot.subsystems.gripper.commands.Intake;
+import frc.robot.subsystems.gripper.commands.Outtake;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.commands.Height;
@@ -17,23 +23,26 @@ import frc.robot.subsystems.elevator.commands.ManualClimb;
 import frc.robot.valuetuner.ValueTuner;
 import webapp.Webserver;
 
-/**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
- */
+import static frc.robot.Ports.Controller.*;
+
 public class RobotContainer {
     public static Elevator elevator = Elevator.getInstance();
-    public static XboxController xboxController = new XboxController(0);
     public static JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
     public static JoystickButton y = new JoystickButton(xboxController, XboxController.Button.kY.value);
     public static JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     public static JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     public static JoystickButton start = new JoystickButton(xboxController, XboxController.Button.kStart.value);
+    public static XboxController xboxController = new XboxController(0);
+    private final Trigger lt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kLeft) > 0.3);
+    private final Trigger rt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kRight) > 0.3);
+    private final JoystickButton lb = new JoystickButton(Xbox, XboxController.Button.kBumperLeft.value);
+    private final JoystickButton rb = new JoystickButton(Xbox, XboxController.Button.kBumperRight.value);
+    private final Gripper gripper = Gripper.getInstance();
 
 
     // The robot's subsystems and commands are defined here...
+        lt.whileActiveContinuous(new Intake(gripper, 1));
+        rt.whileActiveContinuous(new Outtake(gripper, -1));
 
 
     /**
