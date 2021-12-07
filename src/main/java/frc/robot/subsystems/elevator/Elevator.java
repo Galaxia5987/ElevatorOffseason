@@ -11,11 +11,11 @@ import webapp.FireLog;
 
 public class Elevator extends SubsystemBase {
 
+    private static final Elevator INSTANCE = new Elevator();
     public static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
     public static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
     public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
     public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
-    private static final Elevator INSTANCE = new Elevator();
 
     /**
      * Add PID.
@@ -35,9 +35,6 @@ public class Elevator extends SubsystemBase {
         motor.enableVoltageCompensation(true);
         motor.configVoltageCompSaturation(Constants.NOMINAL_VOLTAGE);
     }
-    public void resetElevator(){
-        motor.setSelectedSensorPosition(0);
-    }
 
     /**
      * Create object.
@@ -46,6 +43,10 @@ public class Elevator extends SubsystemBase {
      */
     public static Elevator getInstance() {
         return INSTANCE;
+    }
+
+    public void resetElevator() {
+        motor.setSelectedSensorPosition(0);
     }
 
     /**
@@ -103,5 +104,6 @@ public class Elevator extends SubsystemBase {
 
 
     }
+
 }
 

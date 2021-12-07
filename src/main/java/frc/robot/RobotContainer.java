@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -57,7 +58,8 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        a.whenPressed(new Height(elevator, 0.5));
+        a.whenPressed(new Height(elevator, 0.5)
+        );
         b.whenPressed(new Height(elevator, 1));
         y.whenPressed(new Height(elevator, 1.8));
         x.whenPressed(new Height(elevator, 0));
