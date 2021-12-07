@@ -26,23 +26,22 @@ import webapp.Webserver;
 import static frc.robot.Ports.Controller.*;
 
 public class RobotContainer {
-    public static Elevator elevator = Elevator.getInstance();
+    public static XboxController xboxController = new XboxController(XBOX_CONTROLLER);
     public static JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
     public static JoystickButton y = new JoystickButton(xboxController, XboxController.Button.kY.value);
     public static JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     public static JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     public static JoystickButton start = new JoystickButton(xboxController, XboxController.Button.kStart.value);
-    public static XboxController xboxController = new XboxController(0);
-    private final Trigger lt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kLeft) > 0.3);
-    private final Trigger rt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kRight) > 0.3);
-    private final JoystickButton lb = new JoystickButton(Xbox, XboxController.Button.kBumperLeft.value);
-    private final JoystickButton rb = new JoystickButton(Xbox, XboxController.Button.kBumperRight.value);
+    private final Trigger lt = new Trigger(() -> xboxController.getTriggerAxis(GenericHID.Hand.kLeft) > 0.3);
+    private final Trigger rt = new Trigger(() -> xboxController.getTriggerAxis(GenericHID.Hand.kRight) > 0.3);
+    private final JoystickButton lb = new JoystickButton(xboxController, XboxController.Button.kBumperLeft.value);
+    private final JoystickButton rb = new JoystickButton(xboxController, XboxController.Button.kBumperRight.value);
     private final Gripper gripper = Gripper.getInstance();
+    public static Elevator elevator = Elevator.getInstance();
 
 
     // The robot's subsystems and commands are defined here...
-        lt.whileActiveContinuous(new Intake(gripper, 1));
-        rt.whileActiveContinuous(new Outtake(gripper, -1));
+
 
 
     /**
@@ -71,6 +70,8 @@ public class RobotContainer {
         y.whenPressed(new Height(elevator, 1.8));
         x.whenPressed(new Height(elevator, 0));
         start.whenPressed(() -> elevator.resetElevator());
+        lt.whileActiveContinuous(new Intake(gripper, 1));
+        rt.whileActiveContinuous(new Outtake(gripper, -1));
     }
 
 
