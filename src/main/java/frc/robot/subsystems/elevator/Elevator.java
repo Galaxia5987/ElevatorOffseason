@@ -11,16 +11,16 @@ import webapp.FireLog;
 
 public class Elevator extends SubsystemBase {
 
-    public static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
-    public static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
-    public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
-    public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
+    private static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
+    private static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
+    private static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
+    private static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
     private static final Elevator INSTANCE = new Elevator();
 
     /**
      * Add PID.
      */
-    public Elevator() {
+    private Elevator() {
         motor.setSelectedSensorPosition(0);
         motor.setSensorPhase(Ports.Elevator.SENSOR_PHASE);
         motor.setInverted(Ports.Elevator.MOTOR_INVERTED);
@@ -42,7 +42,7 @@ public class Elevator extends SubsystemBase {
     /**
      * Create object.
      *
-     * @return
+     * @return the elevator instance
      */
     public static Elevator getInstance() {
         return INSTANCE;
