@@ -42,13 +42,13 @@ public class Gripper extends SubsystemBase {
      * Close solenoid
      */
     public void close() {
-        solenoid.set(false);
+        solenoid.set(true);
     }
 
     /**
      * Open solenoid
      */
     public void open() {
-        solenoid.set(true);
+        solenoid.set(false);
     }
 }
