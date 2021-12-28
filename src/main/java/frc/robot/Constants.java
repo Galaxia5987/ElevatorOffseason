@@ -22,7 +22,7 @@ public final class Constants {
     public static final double NOMINAL_VOLTAGE = 12;
 
     public static final class Elevator {
-        public static final double DIAMETER = 0.06; // [m]
+        public static final double DIAMETER = 0.066; // [m]
         public static final double MAX_VELOCITY = 3; // [m/s]
         public static final double ACCELERATION = 1; // [m/s^2]
         public static final int F = 0;
@@ -37,6 +37,12 @@ public final class Constants {
         public static final int BOTTOM = 0;
         public static final double LS_POWER = 0.05;
         public static final double HEIGHT = 0.05; //[m]
+        public static final double MAX_HEIGHT = 1.38;
+        public static final double MIN_HEIGHT = 0.0;
+        public static final double HALF_METER_HEIGHT = 0.5;
+        public static final double METER_HEIGHT = 1.0;
+
+
 
         public static final WebConstant PID_P = new WebConstant("k_p", 0.5);
         public static final WebConstant PID_I = new WebConstant("k_i", 0);
