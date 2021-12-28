@@ -22,7 +22,6 @@ public class Robot extends TimedRobot {
   public static boolean debug = true;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private Compressor compressor = new Compressor();
 
 
   /**
@@ -34,7 +33,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    compressor.start();
   }
 
   /**

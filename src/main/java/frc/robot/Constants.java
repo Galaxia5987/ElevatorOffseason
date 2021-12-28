@@ -22,7 +22,7 @@ public final class Constants {
     public static final double NOMINAL_VOLTAGE = 12;
 
     public static final class Elevator {
-        public static final double DIAMETER = 0.066; // [m]
+        public static final double DIAMETER = 0.06; // [m]
         public static final double MAX_VELOCITY = 3; // [m/s]
         public static final double ACCELERATION = 1; // [m/s^2]
         public static final int F = 0;
