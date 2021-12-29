@@ -40,13 +40,7 @@ public class Height extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (Math.abs(height - elevator.getPosition()) < Constants.Elevator.HEIGHT) {
-            timer.start();
-            elevator.setPower(0);
-
-
-        }
-         return isFinished();
+        return Math.abs(height - elevator.getPosition()) < Constants.Elevator.HEIGHT;
     }
 
 }

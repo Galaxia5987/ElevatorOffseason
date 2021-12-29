@@ -20,7 +20,6 @@ public class Outtake extends CommandBase {
 
     @Override
     public void execute() {
-        gripper.open();
         gripper.setPower(outtakePower);
 
     }

@@ -25,7 +25,6 @@ public class Gripper extends SubsystemBase {
     private Gripper() {
         motorRight.setInverted(RIGHT_MOTOR_INVERTED);
         motorLeft.setInverted(LEFT_MOTOR_INVERTED);
-        motorRight.follow(motorLeft);
     }
 
     /**
@@ -35,6 +34,7 @@ public class Gripper extends SubsystemBase {
      */
     public void setPower(double power) {
         motorRight.set(ControlMode.PercentOutput, power);
+        motorLeft.set(ControlMode.PercentOutput, power);
     }
 
 

@@ -33,6 +33,7 @@ public class RobotContainer {
     public static JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     public static JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     public static JoystickButton start = new JoystickButton(xboxController, XboxController.Button.kStart.value);
+    public static JoystickButton back = new JoystickButton(xboxController, XboxController.Button.kBack.value);
     private final Trigger lt = new Trigger(() -> xboxController.getTriggerAxis(GenericHID.Hand.kLeft) > 0.3);
     private final Trigger rt = new Trigger(() -> xboxController.getTriggerAxis(GenericHID.Hand.kRight) > 0.3);
     private final JoystickButton lb = new JoystickButton(xboxController, XboxController.Button.kBumperLeft.value);
@@ -73,6 +74,7 @@ public class RobotContainer {
         start.whenPressed(() -> elevator.resetElevator());
         lt.whileActiveContinuous(new Intake(gripper, 1));
         rt.whileActiveContinuous(new Outtake(gripper, -1));
+        back.whenPressed(gripper::open);
     }
 
 
