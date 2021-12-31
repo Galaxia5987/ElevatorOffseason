@@ -7,8 +7,11 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -19,10 +22,38 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static boolean debug = true;
+  public static final boolean debug = true;
+  private static final AHRS navx = new AHRS(SPI.Port.kMXP);
+  private static double startAngle;
+
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
+  /**
+   * Gets the current angle of the robot in respect to the start angle.
+   *
+   * @return the current angle of the robot in respect to the start angle.
+   */
+  public static Rotation2d getAngle() {
+    double currentAngle = (navx.getYaw() + 360) % 360;
+    return Rotation2d.fromDegrees(Math.IEEEremainder(currentAngle - startAngle, 360));
+  }
+
+  /**
+   * Resets the angle of the navx to the current angle.
+   */
+  public static void resetAngle() {
+    resetAngle(navx.getYaw());
+  }
+
+  /**
+   * Resets the angle of the navx to the current angle.
+   *
+   * @param angle the angle in -180 to 180 degrees coordinate system.
+   */
+  public static void resetAngle(double angle) {
+    startAngle = (angle + 360) % 360;
+  }
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -32,6 +63,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    resetAngle();
     m_robotContainer = new RobotContainer();
   }
 

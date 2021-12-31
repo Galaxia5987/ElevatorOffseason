@@ -1,7 +1,6 @@
 package frc.robot.subsystems.elevator.commands;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -17,7 +16,7 @@ public class ManualClimb extends CommandBase {
 
     @Override
     public void execute() {
-        elevator.setPower(deadband(-RobotContainer.xboxController.getY(GenericHID.Hand.kLeft)) * 0.2);
+        elevator.setPower(deadband(-RobotContainer.xbox.getY(GenericHID.Hand.kLeft)) * 0.2);
     }
 
     /**

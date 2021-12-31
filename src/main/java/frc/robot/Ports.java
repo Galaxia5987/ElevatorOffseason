@@ -1,7 +1,7 @@
 package frc.robot;
 
 public class Ports {
-    public static class Elevator{
+    public static class Elevator {
         public static final boolean SENSOR_PHASE = false;
         public static final boolean MOTOR_INVERTED = false;
 
@@ -9,6 +9,41 @@ public class Ports {
         public static final int BOTTOM_LIMIT_SWITCH = 1;
         public static final int MOTOR = 31;
     }
+
+    public static final class SwerveDrive {
+        // front right
+        public static final int DRIVE_MOTOR_FR = 23;
+        public static final int ANGLE_MOTOR_FR = 24;
+        public static final boolean DRIVE_INVERTED_FR = false;
+        public static final boolean ANGLE_INVERTED_FR = true;
+        public static final boolean DRIVE_SENSOR_PHASE_FR = false;
+        public static final boolean ANGLE_SENSOR_PHASE_FR = true;
+
+        // front left
+        public static final int DRIVE_MOTOR_FL = 27;
+        public static final int ANGLE_MOTOR_FL = 28;
+        public static final boolean DRIVE_INVERTED_FL = false;
+        public static final boolean ANGLE_INVERTED_FL = false;
+        public static final boolean DRIVE_SENSOR_PHASE_FL = false;
+        public static final boolean ANGLE_SENSOR_PHASE_FL = false;
+
+        // rear right
+        public static final int DRIVE_MOTOR_RR = 21;
+        public static final int ANGLE_MOTOR_RR = 22;
+        public static final boolean DRIVE_INVERTED_RR = false;
+        public static final boolean ANGLE_INVERTED_RR = false;
+        public static final boolean DRIVE_SENSOR_PHASE_RR = true;
+        public static final boolean ANGLE_SENSOR_PHASE_RR = false;
+
+        // rear left
+        public static final int DRIVE_MOTOR_RL = 25;
+        public static final int ANGLE_MOTOR_RL = 26;
+        public static final boolean DRIVE_INVERTED_RL = false;
+        public static final boolean ANGLE_INVERTED_RL = false;
+        public static final boolean DRIVE_SENSOR_PHASE_RL = false;
+        public static final boolean ANGLE_SENSOR_PHASE_RL = false;
+    }
+
     public static class Gripper {
         public static final int LEFTMOTOR = 3;
         public static final int RIGHTMOTOR = 8;
@@ -17,6 +52,7 @@ public class Ports {
         public static final boolean RIGHT_MOTOR_INVERTED = true;
         public static final boolean LEFT_MOTOR_INVERTED = true;
     }
+
     public static class Controller {
         public static final int XBOX_CONTROLLER = 0;
     }
