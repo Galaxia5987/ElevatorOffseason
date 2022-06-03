@@ -17,7 +17,7 @@ public class ManualClimb extends CommandBase {
 
     @Override
     public void execute() {
-        elevator.setPower(deadband(-RobotContainer.xboxController.getY(GenericHID.Hand.kLeft)) * 0.2);
+        elevator.setPower(deadband(-RobotContainer.xboxController.getLeftY()) * 0.2);
     }
 
     /**

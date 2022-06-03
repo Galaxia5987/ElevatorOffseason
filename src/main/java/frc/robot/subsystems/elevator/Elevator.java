@@ -2,7 +2,9 @@ package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import com.ctre.phoenix.motorcontrol.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Ports;
@@ -11,10 +13,8 @@ import webapp.FireLog;
 
 public class Elevator extends SubsystemBase {
 
-    public static TalonFX motor = new TalonFX(Ports.Elevator.MOTOR);
+    public static WPI_TalonFX motor = new WPI_TalonFX(Ports.Elevator.MOTOR);
     public static UnitModel unitModel = new UnitModel(Constants.Elevator.TICKS_PER_METER);
-    public static DigitalInput topLimitSwitch = new DigitalInput(Ports.Elevator.TOP_LIMIT_SWITCH);
-    public static DigitalInput bottomLimitSwitch = new DigitalInput(Ports.Elevator.BOTTOM_LIMIT_SWITCH);
     private static final Elevator INSTANCE = new Elevator();
 
     /**
@@ -31,6 +31,8 @@ public class Elevator extends SubsystemBase {
 
         motor.configMotionAcceleration(unitModel.toTicks100ms(Constants.Elevator.ACCELERATION));
         motor.configMotionCruiseVelocity(unitModel.toTicks100ms(Constants.Elevator.MAX_VELOCITY));
+
+        motor.setNeutralMode(NeutralMode.Brake);
 
         motor.enableVoltageCompensation(true);
         motor.configVoltageCompSaturation(Constants.NOMINAL_VOLTAGE);
@@ -55,7 +57,7 @@ public class Elevator extends SubsystemBase {
      * @return top limit switch.
      */
     public boolean atTop() {
-        return topLimitSwitch.get();
+        return getPosition() >= 1.7;
     }
 
     /**
@@ -64,7 +66,7 @@ public class Elevator extends SubsystemBase {
      * @return bottom limit switch.
      */
     public boolean atBottom() {
-        return bottomLimitSwitch.get();
+        return getPosition() <= 0.05;
     }
 
     /**
@@ -89,7 +91,12 @@ public class Elevator extends SubsystemBase {
      * @param power [%]
      */
     public void setPower(double power) {
-        motor.set(ControlMode.PercentOutput, power);
+        motor.set(ControlMode.PercentOutput, power, DemandType.ArbitraryFeedForward, Constants.Elevator.PID_F.get());
+    }
+
+    public void stop() {
+//        setPower(0);
+        motor.stopMotor();
     }
 
     @Override

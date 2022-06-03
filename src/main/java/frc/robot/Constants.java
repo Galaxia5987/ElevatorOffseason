@@ -30,24 +30,24 @@ public final class Constants {
         public static final int POWER_UP = F + K;
         public static final int POWER_DOWN = F - K;
         public static final int TICKS = 2048;
-        public static final double GEAR_RATIO = 1.0 / 10;
+        public static final double GEAR_RATIO = 1.0 / 6.0;
         public static final double TICKS_PER_METER = TICKS / (DIAMETER * Math.PI * GEAR_RATIO);
         public static final int UNIT_MODEL = 0;
         public static final int TOP = 0;
         public static final int BOTTOM = 0;
         public static final double LS_POWER = 0.05;
-        public static final double HEIGHT = 0.05; //[m]
-        public static final double MAX_HEIGHT = 1.38;
+        public static final double HEIGHT = 0.01; //[m]
+        public static final double MAX_HEIGHT = 1.2;
         public static final double MIN_HEIGHT = 0.0;
         public static final double HALF_METER_HEIGHT = 0.5;
         public static final double METER_HEIGHT = 1.0;
 
 
 
-        public static final WebConstant PID_P = new WebConstant("k_p", 0.5);
-        public static final WebConstant PID_I = new WebConstant("k_i", 0);
-        public static final WebConstant PID_D = new WebConstant("k_d", 0);
-        public static final WebConstant PID_F = new WebConstant("k_f", 0);
+        public static final WebConstant PID_P = WebConstant.of("Elevator","k_p", 0.3);
+        public static final WebConstant PID_I = WebConstant.of("Elevator","k_i", 0);
+        public static final WebConstant PID_D = WebConstant.of("Elevator","k_d", 0);
+        public static final WebConstant PID_F = WebConstant.of("Elevator", "k_f", 0);
         public static final double JOYSTICK_DRIFT = 0.05;
     }
 }

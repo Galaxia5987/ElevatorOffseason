@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.commands.Height;
 import frc.robot.subsystems.elevator.commands.ManualClimb;
-import frc.robot.valuetuner.ValueTuner;
 import webapp.Webserver;
 
 /**
@@ -45,10 +44,9 @@ public class RobotContainer {
         configureButtonBindings();
 
         if (Robot.debug) {
-            startValueTuner();
             startFireLog();
         }
-        elevator.setDefaultCommand(new ManualClimb(elevator));
+//        elevator.setDefaultCommand(new ManualClimb(elevator));
     }
 
     /**
@@ -75,13 +73,6 @@ public class RobotContainer {
 
         // An ExampleCommand will run in autonomous
         return null;
-    }
-
-    /**
-     * Initiates the value tuner.
-     */
-    private void startValueTuner() {
-        new ValueTuner().start();
     }
 
     /**
