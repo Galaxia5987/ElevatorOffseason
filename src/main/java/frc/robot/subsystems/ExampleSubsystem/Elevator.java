@@ -81,14 +81,28 @@ public class Elevator extends SubsystemBase {
         }
     }
 
+    /**
+     * sets the position of the elevator
+     * @param height
+     */
     public void setPosition(double height){
         motor.set(ControlMode.Position, unitModel.toTicks(height));
     }
 
+    /**
+     * ges the position of the elevator
+     * @return
+     */
     public double getPosition(){
         return unitModel.toUnits(motor.getSelectedSensorPosition());
     }
 
+    /**
+     * checks if the elevator reached the desired position
+     * @param currentHeight
+     * @param desiredHeight
+     * @return
+     */
     public boolean heightCheck(double currentHeight, double desiredHeight){
         if (currentHeight>=desiredHeight-3&&currentHeight<=desiredHeight+3){
             return true;

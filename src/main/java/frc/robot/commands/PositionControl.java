@@ -13,16 +13,27 @@ public class PositionControl extends CommandBase {
         addRequirements(elevator);
     }
 
+    /**
+     * sets the position of the elevator
+     */
     @Override
     public void execute() {
         elevator.setPosition(height);
     }
 
+    /**
+     * stops the elevator
+     * @param interrupted
+     */
     @Override
     public void end(boolean interrupted) {
         elevator.setPower(0);
     }
 
+    /**
+     * checks if the elevator reached the desired height
+     * @return
+     */
     @Override
     public boolean isFinished() {
         if(elevator.heightCheck(elevator.getPosition(), height)){
