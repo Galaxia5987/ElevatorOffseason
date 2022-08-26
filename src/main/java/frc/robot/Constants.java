@@ -16,7 +16,11 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final class Gripper {
-    }
+    public static final double DRUM_RADIUS= 0.03;//[meter]
+    public static final double TICKS_PER_METER= 2 * Math.PI * DRUM_RADIUS / 4096;//[ticks\second]
+    public static final int CONFIG_VOLT= 12;
+    public static final boolean ENABLE_VOLT_COMP= true;
+    public static final int MOTION_ACCELERATION=0;
+    public static final int CRUISE_VELOCITY=0;
 
 }
