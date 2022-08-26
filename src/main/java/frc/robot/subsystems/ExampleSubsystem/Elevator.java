@@ -80,4 +80,12 @@ public class Elevator extends SubsystemBase {
             return value;
         }
     }
+
+    public void setPosition(double height){
+        motor.set(ControlMode.Position, unitModel.toTicks(height));
+    }
+
+    public double getPosition(){
+        return unitModel.toUnits(motor.getSelectedSensorPosition());
+    }
 }
