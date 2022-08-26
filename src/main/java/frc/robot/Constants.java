@@ -22,5 +22,6 @@ public final class Constants {
     public static final boolean ENABLE_VOLT_COMP= true;
     public static final int MOTION_ACCELERATION=0;
     public static final int CRUISE_VELOCITY=0;
+    public static final double DEAD_BEND=0.05;
 
 }
