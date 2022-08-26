@@ -1,5 +1,6 @@
 package frc.robot.subsystems.ExampleSubsystem;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -9,7 +10,7 @@ import frc.robot.subsystems.UnitModel;
 
 public class Elevator extends SubsystemBase {
     private final WPI_TalonFX motor=new WPI_TalonFX(Ports.MOTOR);
-    private static final Elevator INSTANCE=null;
+    private static Elevator INSTANCE=null;
     public static final UnitModel unitModel  = new UnitModel(Constants.TICKS_PER_METER);
 
     public Elevator(){
@@ -23,5 +24,26 @@ public class Elevator extends SubsystemBase {
 
     }
 
-    public static void
+    public Elevator getInstance(){
+        if(INSTANCE==null){
+            INSTANCE = new Elevator();
+        }
+        return INSTANCE;
+    }
+
+    public double getPower(){
+        return motor.get();
+    }
+
+    public void setPower(double Power){
+        motor.set(Power);
+    }
+
+    public void setVelocity(double velocity){
+        motor.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
+    }
+
+    public double getVelocity(){
+         return unitModel.toVelocity(motor.getSelectedSensorVelocity());
+    }
 }
