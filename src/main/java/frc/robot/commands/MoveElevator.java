@@ -6,14 +6,14 @@ import frc.robot.subsystems.ExampleSubsystem.Elevator;
 import java.util.function.DoubleSupplier;
 
 public class MoveElevator extends CommandBase {
-        private final Elevator elevator;
-        private final DoubleSupplier joystickValue;
+    private final Elevator elevator;
+    private final DoubleSupplier joystickValue;
 
-        public MoveElevator(Elevator elevator, DoubleSupplier joystickValue){
-            this.elevator=elevator;
-            this.joystickValue=joystickValue;
-            addRequirements(elevator);
-        }
+    public MoveElevator(Elevator elevator, DoubleSupplier joystickValue) {
+        this.elevator = elevator;
+        this.joystickValue = joystickValue;
+        addRequirements(elevator);
+    }
 
     /**
      * sets the power of the elevator to the desired value with a joystick
@@ -25,6 +25,7 @@ public class MoveElevator extends CommandBase {
 
     /**
      * stops the elevator
+     *
      * @param interrupted
      */
     @Override
