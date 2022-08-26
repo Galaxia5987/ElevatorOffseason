@@ -88,4 +88,13 @@ public class Elevator extends SubsystemBase {
     public double getPosition(){
         return unitModel.toUnits(motor.getSelectedSensorPosition());
     }
+
+    public boolean heightCheck(double currentHeight, double desiredHeight){
+        if (currentHeight>=desiredHeight-3&&currentHeight<=desiredHeight+3){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
