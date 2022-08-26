@@ -47,5 +47,12 @@ public class Elevator extends SubsystemBase {
          return unitModel.toVelocity(motor.getSelectedSensorVelocity());
     }
 
-    
+    public double DeadZone(double value){
+        if(value>=Constants.DEAD_BEND||value<=Constants.DEAD_BEND){
+            return 0;
+        }
+        else{
+            return value;
+        }
+    }
 }
