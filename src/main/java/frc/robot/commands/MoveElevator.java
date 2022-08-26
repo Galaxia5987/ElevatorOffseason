@@ -7,26 +7,21 @@ import java.util.function.DoubleSupplier;
 
 public class MoveElevator extends CommandBase {
         private final Elevator elevator;
-        private final DoubleSupplier doubleSupplier;
+        private final DoubleSupplier joystickValue;
 
-        public MoveElevator(Elevator elevator, DoubleSupplier doubleSupplier){
+        public MoveElevator(Elevator elevator, DoubleSupplier joystickValue){
             this.elevator=elevator;
-            this.doubleSupplier=doubleSupplier;
+            this.joystickValue=joystickValue;
             addRequirements(elevator);
         }
 
     @Override
     public void execute() {
-        elevator.setPower();
+        elevator.setPower(elevator.DeadZone(joystickValue.getAsDouble()));
     }
 
     @Override
     public void end(boolean interrupted) {
-
-    }
-
-    @Override
-    public boolean isFinished() {
-        return false;
+        elevator.setPower(0);
     }
 }
