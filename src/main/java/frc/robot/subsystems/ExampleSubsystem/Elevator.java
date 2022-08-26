@@ -24,6 +24,10 @@ public class Elevator extends SubsystemBase {
 
     }
 
+    /**
+     * creates an instance if there isn't one
+     * @return
+     */
     public Elevator getInstance(){
         if(INSTANCE==null){
             INSTANCE = new Elevator();
@@ -31,22 +35,43 @@ public class Elevator extends SubsystemBase {
         return INSTANCE;
     }
 
+    /**
+     * gets the power of the elevator
+     * @return
+     */
     public double getPower(){
         return motor.get();
     }
 
+    /**
+     * sets the power of the elevator
+     * @param Power
+     */
     public void setPower(double Power){
         motor.set(Power);
     }
 
+    /**
+     * sets the velocity of the elevator
+     * @param velocity
+     */
     public void setVelocity(double velocity){
         motor.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
     }
 
+    /**
+     * gets the velocity of the elevator
+     * @return
+     */
     public double getVelocity(){
          return unitModel.toVelocity(motor.getSelectedSensorVelocity());
     }
 
+    /**
+     * checks if the joystick is in the defined dead zone and stops the elevator from moving if it's in the dead zone
+     * @param value
+     * @return
+     */
     public double DeadZone(double value){
         if(value>=Constants.DEAD_BEND||value<=Constants.DEAD_BEND){
             return 0;

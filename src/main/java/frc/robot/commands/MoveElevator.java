@@ -15,11 +15,18 @@ public class MoveElevator extends CommandBase {
             addRequirements(elevator);
         }
 
+    /**
+     * sets the power of the elevator to the desired value with a joystick
+     */
     @Override
     public void execute() {
         elevator.setPower(elevator.DeadZone(joystickValue.getAsDouble()));
     }
 
+    /**
+     * stops the elevator
+     * @param interrupted
+     */
     @Override
     public void end(boolean interrupted) {
         elevator.setPower(0);
