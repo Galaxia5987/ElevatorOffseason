@@ -18,5 +18,9 @@ package frc.robot;
 public final class Constants {
     public static final class Gripper {
     }
+    public static class Elevator{
+        public static final Boolean VOLT = true;
+        public static final int SAT = 12;
+    }
 
 }
