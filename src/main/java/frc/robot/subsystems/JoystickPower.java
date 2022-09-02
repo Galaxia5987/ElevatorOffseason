@@ -1,0 +1,31 @@
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.util.function.DoubleSupplier;
+
+public class JoystickPower extends CommandBase {
+    private final Elevator elevator;
+    private DoubleSupplier joystickinput;
+
+    public JoystickPower(Elevator elevator, DoubleSupplier joystickinput) {
+        this.elevator = elevator;
+        this.joystickinput = joystickinput;
+        addRequirements(elevator);
+    }
+
+    @Override
+    public void initialize() {
+    }
+
+    @Override
+    public void execute() {
+        elevator.setPower(elevator.getDeadband(joystickinput.getAsDouble()));
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        elevator.setPower(0);
+    }
+}
