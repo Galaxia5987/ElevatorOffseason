@@ -22,12 +22,28 @@ public class Elevator extends SubsystemBase {
         }
         return INSTANCE;
     }
+
+    /**
+     * set power
+     * @param power
+     */
     public void setPower(double power){
         motor.set(power);
     }
+
+    /**
+     * get power
+     * @return
+     */
     public double getPower(){
         return motor.get();
     }
+
+    /**
+     * deadband
+     * @param value
+     * @return
+     */
     public double getDeadband(double value){
         if (Math.abs(value) < 0.05){
             value = 0;

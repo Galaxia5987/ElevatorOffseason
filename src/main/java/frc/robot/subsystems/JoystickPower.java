@@ -19,11 +19,18 @@ public class JoystickPower extends CommandBase {
     public void initialize() {
     }
 
+    /**
+     * set power to power%
+     */
     @Override
     public void execute() {
         elevator.setPower(elevator.getDeadband(joystickinput.getAsDouble()));
     }
 
+    /**
+     * set power to 0%
+     * @param interrupted whether the command was interrupted/canceled
+     */
     @Override
     public void end(boolean interrupted) {
         elevator.setPower(0);
