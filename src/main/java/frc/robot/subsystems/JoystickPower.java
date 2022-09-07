@@ -1,17 +1,16 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import java.util.function.DoubleSupplier;
 
 public class JoystickPower extends CommandBase {
     private final Elevator elevator;
-    private DoubleSupplier joystickinput;
+    private final DoubleSupplier joystickinput;
 
     public JoystickPower(Elevator elevator, DoubleSupplier joystickinput) {
         this.elevator = elevator;
-        this.joystickinput = joystickinput;
+        this.joystickinput =  joystickinput;
         addRequirements(elevator);
     }
 
@@ -29,6 +28,7 @@ public class JoystickPower extends CommandBase {
 
     /**
      * set power to 0%
+     *
      * @param interrupted whether the command was interrupted/canceled
      */
     @Override

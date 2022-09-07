@@ -18,10 +18,11 @@ package frc.robot;
 public final class Constants {
     public static final class Gripper {
     }
-    public static class Elevator{
+
+    public static class Elevator {
         public static final Boolean VOLT = true;
         public static final int SAT = 12;
-        public static final double TICKS_PER_METER = 2048/(Math.PI*Math.PI*0.066/10);
+        public static final double TICKS_PER_METER = 2048 / (Math.PI * Math.PI * 0.066 / 10);
     }
 
 }

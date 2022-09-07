@@ -2,22 +2,17 @@ package frc.robot.subsystems.gripper;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Ports;
 
 import static frc.robot.Ports.Gripper.*;
 
 public class Gripper extends SubsystemBase {
+    private final static Gripper INSTANCE = new Gripper();
     private final VictorSPX motorRight = new VictorSPX(RIGHTMOTOR);
     private final VictorSPX motorLeft = new VictorSPX(LEFTMOTOR);
-    private final Solenoid solenoid = new Solenoid(SOLENOID);
-
-    private final static Gripper INSTANCE = new Gripper();
-
-    public static Gripper getInstance() {
-        return INSTANCE;
-    }
+    private final Solenoid solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID);
 
     /**
      * Check if motor inverted
@@ -26,6 +21,10 @@ public class Gripper extends SubsystemBase {
         motorRight.setInverted(RIGHT_MOTOR_INVERTED);
         motorLeft.setInverted(LEFT_MOTOR_INVERTED);
         motorRight.follow(motorLeft);
+    }
+
+    public static Gripper getInstance() {
+        return INSTANCE;
     }
 
     /**
