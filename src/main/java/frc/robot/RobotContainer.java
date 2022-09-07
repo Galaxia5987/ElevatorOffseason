@@ -30,6 +30,8 @@ public class RobotContainer {
 
     public RobotContainer() {
         configureButtonBindings();
+
+        elevator.setDefaultCommand(new JoystickPower(elevator, xbox::getRightY));
     }
     //robot will intake when left trigger is held and outtake while right trigger is held
     private void configureButtonBindings() {
