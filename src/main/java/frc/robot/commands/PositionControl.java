@@ -9,7 +9,7 @@ public class PositionControl extends CommandBase {
 
     public PositionControl(Elevator elevator, double height) {
         this.elevator = elevator;
-        this.height=height;
+        this.height = height;
         addRequirements(elevator);
     }
 
@@ -23,6 +23,7 @@ public class PositionControl extends CommandBase {
 
     /**
      * stops the elevator
+     *
      * @param interrupted
      */
     @Override
@@ -32,14 +33,14 @@ public class PositionControl extends CommandBase {
 
     /**
      * checks if the elevator reached the desired height
+     *
      * @return
      */
     @Override
     public boolean isFinished() {
-        if(elevator.heightCheck(elevator.getPosition(), height)){
+        if (elevator.heightCheck(elevator.getPosition(), height)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
