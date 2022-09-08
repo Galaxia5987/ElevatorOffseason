@@ -20,12 +20,6 @@ import frc.robot.subsystems.gripper.commands.Outtake;
 import static frc.robot.Ports.Controller.*;
 
 public class RobotContainer {
-    private final XboxController Xbox = new XboxController(XBOX_CONTROLLER);
-    private final Trigger lt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kLeft) > 0.3);
-    private final Trigger rt = new Trigger(() -> Xbox.getTriggerAxis(GenericHID.Hand.kRight) > 0.3);
-    private final JoystickButton lb = new JoystickButton(Xbox, XboxController.Button.kBumperLeft.value);
-    private final JoystickButton rb = new JoystickButton(Xbox, XboxController.Button.kBumperRight.value);
-    private final Gripper gripper = Gripper.getInstance();
 
 
     public RobotContainer() {
@@ -35,8 +29,7 @@ public class RobotContainer {
     }
     //robot will intake when left trigger is held and outtake while right trigger is held
     private void configureButtonBindings() {
-        lt.whileActiveContinuous(new Intake(gripper, 1));
-        rt.whileActiveContinuous(new Outtake(gripper, -1));
+
     }
 
 

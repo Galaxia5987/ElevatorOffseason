@@ -1,15 +1,10 @@
 package frc.robot;
 
-public class Ports {
-    public static class Gripper {
-        public static final int LEFTMOTOR = 0;
-        public static final int RIGHTMOTOR = 0;
-        public static final int SOLENOID = 0;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
-        public static final boolean RIGHT_MOTOR_INVERTED = false;
-        public static final boolean LEFT_MOTOR_INVERTED = false;
-    }
-    public static class Controller {
-        public static final int XBOX_CONTROLLER = 0;
-    }
+public class Ports {
+    public static final int MOTOR=0;
+    public static final TalonFXInvertType INVERTED = TalonFXInvertType.Clockwise;
+
 }
