@@ -1,8 +1,8 @@
 package frc.robot;
 
 public class Ports {
-    public static class Gripper {
-        public static final int LEFTMOTOR = 0;
+    public static class Elevator {
+        public static final int motor = 0;
         public static final int RIGHTMOTOR = 0;
         public static final int SOLENOID = 0;
 
