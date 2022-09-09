@@ -1,9 +1,8 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 <<<<<<< HEAD
-import edu.wpi.first.wpilibj2.command.Command;
 =======
 >>>>>>> parent of 86ddd8e... Merge pull request #5 from Galaxia5987/Jonathan
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
