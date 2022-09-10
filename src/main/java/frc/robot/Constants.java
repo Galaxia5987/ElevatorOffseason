@@ -16,6 +16,17 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final class Elevator {
+
+        public static final double kP = 0;
+        public static final double kI = 0;
+        public static final double kD = 0;
+        public static final double kF = 0;
+        public static final double RADIUS = 0.66;
+        public static final double GEAR_RATIO = 0.1;
+        public static final double TICKS_PER_METER = 2048. / (2*Math.PI*RADIUS) * GEAR_RATIO;
+    }
+
     public static final class Gripper {
     }
 
